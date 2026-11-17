@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#dff1ff" />
+<title>STEAM DAY 虛擬校園</title>
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+<div id="labels" class="labels"></div>
+
+<div id="hud" class="hud">
+
+  <div id="facing" class="facing">面向：北 N</div>
+
+  <button id="menuBtn" class="icon-btn" type="button" aria-label="打開選單" aria-haspopup="dialog" aria-controls="menu" aria-expanded="false" title="選單">☰</button>
+
+  <!-- 選單背幕：點擊可關閉 -->
+  <div id="menuBackdrop" class="menu-backdrop hidden" aria-hidden="true"></div>
+
+  <div id="menu" class="menu hidden" role="dialog" aria-modal="true" aria-labelledby="menuTitle" tabindex="-1">
+    <button type="button" class="menu-x" aria-label="關閉選單">✕</button>
+
+    <header class="menu-head">
+      <p id="menuEyebrow" class="menu-eyebrow">STEAM DAY · 虛擬校園導覽</p>
+      <h1 id="menuTitle">STEAM DAY 虛擬校園</h1>
+      <p id="menuSub" class="menu-sub"></p>
+      <p id="menuMeta" class="menu-meta"></p>
+    </header>
+
+    <div id="zoneList" class="zone-list"></div>
+
+    <footer class="menu-foot">
+      <div class="menu-row">
+        <button id="langBtn" class="chip" type="button">English</button>
+        <button id="genderBtn" class="chip" type="button">角色：男生</button>
+        <button id="camBtn" class="chip" type="button">轉到正面</button>
+        <button id="fsBtn" class="chip" type="button">全螢幕</button>
+      </div>
+      <button id="closeMenu" class="primary" type="button">開始參觀</button>
+    </footer>
+  </div>
+
+  <!-- 指南針：玻璃底條 + 刻度帶 -->
+  <div id="compass" class="compass" aria-hidden="true">
+    <div class="compass-glow"></div>
+    <div id="tape" class="tape"></div>
+    <div class="needle"></div>
+  </div>
+
+  <div class="pad pad-left">
+    <button id="turnL" class="round" type="button" aria-label="左轉 45 度"><span>◀</span><em>左轉45°</em></button>
+    <button id="turnR" class="round" type="button" aria-label="右轉 45 度"><span>▶</span><em>右轉45°</em></button>
+  </div>
+
+  <div class="pad pad-right">
+    <div class="pad-col">
+      <button id="lookUp" class="round small" type="button" aria-label="擡頭"><span>↑</span><em>看上</em></button>
+      <button id="lookDown" class="round small" type="button" aria-label="低頭"><span>↓</span><em>看下</em></button>
+    </div>
+    <div class="pad-col">
+      <button id="fwd" class="round" type="button" aria-label="前進"><span>▲</span><em>前進</em></button>
+      <button id="back" class="round" type="button" aria-label="後退"><span>▼</span><em>後退</em></button>
+    </div>
+  </div>
+
+  <div id="prompt" class="prompt hidden">
+    <button id="promptBtn" class="primary" type="button"></button>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+</div>
+
+<div id="video" class="video hidden">
+  <div class="video-box">
+    <div id="videoFrame" class="video-frame"></div>
+    <button id="videoClose" class="video-close" type="button" aria-label="關閉">✕</button>
+  </div>
+</div>
+
+<div id="fade" class="fade"></div>
+
+<div id="splash" class="splash">
+  <div class="splash-inner">
+    <div class="splash-kicker">MKPC</div>
+    <div class="splash-title">STEAM DAY</div>
+    <div class="splash-sub">虛擬校園導覽 · Virtual Campus Tour</div>
+    <div class="splash-track" aria-hidden="true"><i></i></div>
+    <p class="splash-msg">載入中…</p>
+  </div>
+</div>
+
+<noscript><p style="padding:2rem;font-family:sans-serif">這個頁面需要 JavaScript 與 WebGL。</p></noscript>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
+

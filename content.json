@@ -1,0 +1,129 @@
+{
+  "config": {
+    "title": { "zh": "STEAM DAY 虛擬校園", "en": "STEAM DAY Virtual Campus" },
+    "subtitle": { "zh": "一年級至六年級的 STEAM DAY 活動花絮", "en": "Highlights from Grade 1 to Grade 6" }
+  },
+  "zones": [
+    {
+      "id": "special",
+      "open": true,
+      "color": "#7a4e9e",
+      "title": { "zh": "特別展區", "en": "Special Exhibition" },
+      "theme": { "zh": "上海締造未來", "en": "Building the Future · Shanghai" },
+      "summary": {
+        "zh": "「締造未來」青少年創新發展項目——新時代築夢計劃（機器人）。",
+        "en": "Youth innovation programme in Shanghai: robotics, exchange and making."
+      },
+      "photos": [
+        "assets/shanghai/p01.jpg",
+        "assets/shanghai/p02.jpg",
+        "assets/shanghai/p03.jpg",
+        "assets/shanghai/p04.jpg",
+        "assets/shanghai/p05.jpg",
+        "assets/shanghai/p06.jpg",
+        "assets/shanghai/p07.jpg",
+        "assets/shanghai/p08.jpg",
+        "assets/shanghai/p09.jpg",
+        "assets/shanghai/p10.jpg",
+        "assets/shanghai/p11.jpg",
+        "assets/shanghai/p12.jpg",
+        "assets/shanghai/p13.jpg",
+        "assets/shanghai/p14.jpg",
+        "assets/shanghai/p15.jpg"
+      ],
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "活動花絮", "en": "Highlights" } }
+      ]
+    },
+    {
+      "id": "g1",
+      "open": false,
+      "grade": 1,
+      "color": "#f0a63c",
+      "title": { "zh": "一年級", "en": "Grade 1" },
+      "theme": { "zh": "光影與顏色", "en": "Light & Colour" },
+      "summary": {
+        "zh": "用稜鏡把白光拆成彩虹，再用濾紙做一張屬於自己的色卡。",
+        "en": "Split white light into a rainbow with a prism, then make your own colour card."
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    },
+    {
+      "id": "g2",
+      "open": false,
+      "grade": 2,
+      "color": "#46b39d",
+      "title": { "zh": "二年級", "en": "Grade 2" },
+      "theme": { "zh": "紙橋與結構", "en": "Paper Bridges" },
+      "summary": {
+        "zh": "只用幾張紙，看看誰的橋能承受最多的鉛筆盒。",
+        "en": "With only a few sheets of paper, whose bridge can hold the most pencil cases?"
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    },
+    {
+      "id": "g3",
+      "open": false,
+      "grade": 3,
+      "color": "#8e6bc8",
+      "title": { "zh": "三年級", "en": "Grade 3" },
+      "theme": { "zh": "簡單機械", "en": "Simple Machines" },
+      "summary": {
+        "zh": "齒輪、滑輪與槓桿：把一個小小的力氣放大。",
+        "en": "Gears, pulleys and levers: turning a small force into a big one."
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    },
+    {
+      "id": "g4",
+      "open": false,
+      "grade": 4,
+      "color": "#4c8dd6",
+      "title": { "zh": "四年級", "en": "Grade 4" },
+      "theme": { "zh": "電路與編程", "en": "Circuits & Coding" },
+      "summary": {
+        "zh": "接上電線與 micro:bit，讓燈亮起來、讓蜂鳴器唱歌。",
+        "en": "Wire up a micro:bit, light up an LED and make the buzzer sing."
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    },
+    {
+      "id": "g5",
+      "open": false,
+      "grade": 5,
+      "color": "#67b34e",
+      "title": { "zh": "五年級", "en": "Grade 5" },
+      "theme": { "zh": "機械人", "en": "Robotics" },
+      "summary": {
+        "zh": "組裝、測試、再改良：讓機械人走完一條指定的路線。",
+        "en": "Build, test, refine: guide a robot through a set course."
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    },
+    {
+      "id": "g6",
+      "open": false,
+      "grade": 6,
+      "color": "#e06b7f",
+      "title": { "zh": "六年級", "en": "Grade 6" },
+      "theme": { "zh": "工程設計", "en": "Engineering Design" },
+      "summary": {
+        "zh": "由問題出發，畫圖、造原型、再向同學解說你的設計。",
+        "en": "Start from a problem, sketch, prototype, then pitch your design."
+      },
+      "videos": [
+        { "type": "youtube", "id": "", "label": { "zh": "STEAM DAY 花絮", "en": "STEAM Day highlights" } }
+      ]
+    }
+  ]
+}
