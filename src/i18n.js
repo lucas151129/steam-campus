@@ -30,6 +30,7 @@ export const STR = {
     zonesUnit: '個展區',
     closedUnit: '個未開放',
     go: '參觀',
+    clickPhoto: '點一下相片可以放大看',
   },
   en: {
     title: 'STEAM DAY Virtual Campus',
@@ -62,6 +63,7 @@ export const STR = {
     zonesUnit: 'zones open',
     closedUnit: 'not open yet',
     go: 'Visit',
+    clickPhoto: 'Tap a photo to enlarge it',
   },
 };
 

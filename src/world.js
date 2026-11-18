@@ -1387,6 +1387,7 @@ export function buildRoom(zone) {
 
   /* --- 大螢幕的相片輪播（與相片牆共用貼圖快取） --- */
   let tickSlides = () => {};
+  let screenPick = null;
 
   if (!hasVideo && zone.photos && zone.photos.length) {
     const mesh = new THREE.Mesh(
@@ -1430,9 +1431,15 @@ export function buildRoom(zone) {
       slides.i = (slides.i + 1) % slides.items.length;
       show(slides.items[slides.i]);
     };
+
+    // 點大螢幕 = 放大「現在這一張」
+    screenPick = {
+      mesh,
+      index: () => (slides.items[slides.i] ? slides.items[slides.i].idx : 0),
+    };
   }
 
-  if (zone.photos && zone.photos.length) addPhotoWall(group, zone.photos, S);
+  const photoSpots = zone.photos && zone.photos.length ? addPhotoWall(group, zone.photos, S) : [];
 
   group.add(new THREE.AmbientLight(0xffffff, 0.5));
   const lamp = new THREE.PointLight(tint, 60, 45, 2);
@@ -1448,6 +1455,8 @@ export function buildRoom(zone) {
     yaw: 0,
     hasVideo,
     tickSlides,
+    photoSpots,
+    screenPick,
     bounds: { type: 'rect', minX: -11.4, maxX: 11.4, minZ: -11.4, maxZ: 11.4 },
     colliders: [
       { x: -8.4, z: -5, r: 2.0 },
@@ -1531,13 +1540,14 @@ function addPhotoWall(group, photos, S) {
   }
 
   const picks = photos.slice(0, slots.length);
-  if (!picks.length) return;
+  if (!picks.length) return [];
 
   const MAXW = 4.6;
   const MAXH = 2.3;
   const BAR = 0.13; // 木框邊寬
   const frames = new Batch();
   const woodMat = vertexLambert();
+  const spots = [];
   let pending = picks.length;
   let frameMesh = null;
 
@@ -1599,12 +1609,16 @@ function addPhotoWall(group, photos, S) {
         );
         plane.position.set(px, s.y, s.z);
         plane.rotation.y = (-s.side * Math.PI) / 2;
+        plane.userData.photoIndex = i; // 對應 zone.photos 的位置
         group.add(plane);
+        spots.push(plane);
       }
 
       flushFrames();
     });
   });
+
+  return spots;
 }
 
 /* ===================== 腳下陰影 ===================== */

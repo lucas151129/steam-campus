@@ -5,6 +5,7 @@ import { Controller } from './controller.js';
 import { Hud } from './hud.js';
 import { Npc } from './npc.js';
 import { initMedia, openVideo } from './media.js';
+import { initLightbox, openLightbox, closeLightbox } from './lightbox.js';
 import { t, pick, setLang, getLang } from './i18n.js';
 
 /* ---------------- 狀態 ---------------- */
@@ -14,7 +15,11 @@ const state = {
   gender: 'boy',
   menuOpen: false,
   videoOpen: false,
+  photoOpen: false,
 };
+
+const hintedRooms = new Set();
+let pendingPhoto = null;
 
 const input = { fwd: false, back: false };
 const roomCache = new Map();
@@ -72,7 +77,7 @@ const view = { pitch: 0, target: 0 };
 const PITCH_MIN = -0.35;
 const PITCH_MAX = 0.5;
 
-const isPaused = () => state.menuOpen || state.videoOpen || fading;
+const isPaused = () => state.menuOpen || state.videoOpen || state.photoOpen || fading;
 const DEBUG = new URLSearchParams(location.search).has('debug');
 const MAX_FRAMES = Number(new URLSearchParams(location.search).get('frames') || 0) || 0;
 let frameCount = 0;
@@ -105,6 +110,7 @@ async function boot() {
 
   const q = new URLSearchParams(location.search);
   state.front = q.get('cam') === 'front';
+  if (q.has('photo')) pendingPhoto = Number(q.get('photo')) || 0;
   if (q.has('yaw')) {
     const deg = Number(q.get('yaw'));
     if (Number.isFinite(deg)) player.face((deg * Math.PI) / 180);
@@ -134,8 +140,10 @@ async function boot() {
   });
 
   initMedia();
+  initLightbox();
   bindInput();
   bindButtons();
+  bindPhotoPicking();
   bindResize();
   applyGender();
   addGateLabels();
@@ -144,6 +152,10 @@ async function boot() {
 
   document.addEventListener('campus:video', (e) => {
     state.videoOpen = !!(e.detail && e.detail.open);
+  });
+
+  document.addEventListener('campus:photo', (e) => {
+    state.photoOpen = !!(e.detail && e.detail.open);
   });
 
   renderer.setAnimationLoop(frame);
@@ -162,6 +174,32 @@ async function boot() {
     if (jump) {
       const z = content.zones.find((x) => x.id === jump);
       if (z) setTimeout(() => enterZone(z), 400);
+    }
+
+    // ?autotap：把第一張相片投影到螢幕座標再模擬點擊（驗證 raycast 用）
+    if (params.has('autotap')) {
+      setTimeout(() => {
+        const spot = room && room.photoSpots ? room.photoSpots.find(Boolean) : null;
+        if (!spot) {
+          hud.toast('AUTOTAP no spot · n=' + (room && room.photoSpots ? room.photoSpots.length : -1), 12000);
+          return;
+        }
+        const v = new THREE.Vector3();
+        spot.getWorldPosition(v);
+        v.project(camera);
+        const x = (v.x * 0.5 + 0.5) * window.innerWidth;
+        const y = (-v.y * 0.5 + 0.5) * window.innerHeight;
+        hud.toast('AUTOTAP ' + Math.round(x) + ',' + Math.round(y), 12000);
+
+        setTimeout(() => {
+          const el = renderer.domElement;
+          const ev = (type) =>
+            new PointerEvent(type, { clientX: x, clientY: y, bubbles: true, pointerType: 'mouse' });
+          el.dispatchEvent(ev('pointerdown'));
+          el.dispatchEvent(ev('pointerup'));
+          setTimeout(() => hud.toast('TAP ' + (window.__lastPick || 'nofire'), 12000), 500);
+        }, 400);
+      }, 1900);
     }
   }, 700);
 }
@@ -343,7 +381,11 @@ function frame() {
       'k · tex ' +
       renderer.info.memory.textures +
       ' · dpr ' +
-      pixelRatio.toFixed(2);
+      pixelRatio.toFixed(2) +
+      ' · spots ' +
+      (room && room.photoSpots ? room.photoSpots.filter(Boolean).length : 0) +
+      ' · ' +
+      (window.__lastPick || '-');
   }
 }
 
@@ -462,12 +504,26 @@ function enterZone(zone) {
     hud.clearLabels();
     hud.setHeader(pick(zone.title) + ' · ' + pick(zone.theme));
     hud.showBack(true, '← ' + t('back'));
+
+    // 第一次進入有相片的展館，提示可以點相片放大
+    if (zone.photos && zone.photos.length && !hintedRooms.has(zone.id)) {
+      hintedRooms.add(zone.id);
+      setTimeout(() => hud.toast(t('clickPhoto'), 4200), 700);
+    }
+
+    if (pendingPhoto != null && zone.photos && zone.photos.length) {
+      const at = pendingPhoto;
+      pendingPhoto = null;
+      setTimeout(() => openLightbox(zone.photos, at, pick(zone.title) + ' · ' + pick(zone.theme)), 500);
+    }
   });
 }
 
 function exitRoom() {
   if (state.mode !== 'room') return;
   hud.hidePrompt();
+  closeLightbox();
+  if (renderer) renderer.domElement.style.cursor = '';
 
   fadeTo(() => {
     if (room) {
@@ -549,6 +605,77 @@ function toggleFullscreen() {  const d = document.documentElement;
   }
 }
 
+/* ---------------- 相片點擊放大 ---------------- */
+const raycaster = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+let tapX = 0;
+let tapY = 0;
+let tapT = 0;
+
+function pickPhotoAt(cx, cy) {
+  if (!room) return null;
+
+  const targets = [];
+  if (room.photoSpots) {
+    for (const m of room.photoSpots) if (m && m.visible && m.parent) targets.push(m);
+  }
+  if (room.screenPick && room.screenPick.mesh && room.screenPick.mesh.visible) {
+    targets.push(room.screenPick.mesh);
+  }
+  if (!targets.length) return null;
+
+  ndc.set((cx / window.innerWidth) * 2 - 1, -(cy / window.innerHeight) * 2 + 1);
+  raycaster.setFromCamera(ndc, camera);
+  const hit = raycaster.intersectObjects(targets, false)[0];
+  if (!hit) return null;
+
+  if (room.screenPick && hit.object === room.screenPick.mesh) {
+    return { index: room.screenPick.index() };
+  }
+  return { index: hit.object.userData.photoIndex || 0 };
+}
+
+function bindPhotoPicking() {
+  const canvas = renderer.domElement;
+  let hoverAt = 0;
+
+  canvas.addEventListener('pointerdown', (e) => {
+    tapX = e.clientX;
+    tapY = e.clientY;
+    tapT = performance.now();
+  });
+
+  // 輕點（不是拖曳）才當作「點相片」
+  canvas.addEventListener('pointerup', (e) => {
+    if (state.mode !== 'room' || isPaused()) {
+      if (DEBUG) window.__lastPick = 'blocked mode=' + state.mode + ' paused=' + isPaused();
+      return;
+    }
+    if (Math.hypot(e.clientX - tapX, e.clientY - tapY) > 14) return;
+    if (performance.now() - tapT > 700) return;
+
+    const hit = pickPhotoAt(e.clientX, e.clientY);
+    const zone = state.zone;
+    if (DEBUG) window.__lastPick = hit ? 'HIT ' + hit.index : 'MISS';
+    if (!hit || !zone || !zone.photos || !zone.photos.length) return;
+
+    openLightbox(zone.photos, hit.index, pick(zone.title) + ' · ' + pick(zone.theme));
+  });
+
+  // 桌面：滑過相片時換游標
+  canvas.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch') return;
+    if (state.mode !== 'room') {
+      canvas.style.cursor = '';
+      return;
+    }
+    const now = performance.now();
+    if (now - hoverAt < 120) return;
+    hoverAt = now;
+    canvas.style.cursor = pickPhotoAt(e.clientX, e.clientY) ? 'zoom-in' : '';
+  });
+}
+
 /* ---------------- 輸入 ---------------- */
 function bindInput() {
   window.addEventListener('keydown', (e) => {
@@ -574,6 +701,7 @@ function bindInput() {
     } else if (k === 'e' || k === 'enter') {
       if (!isPaused()) hud.el.promptBtn.click();
     } else if (k === 'escape') {
+      if (state.photoOpen) return; // 放大層自己處理 Esc
       if (state.videoOpen) return;
       if (state.menuOpen) hud.closeMenu();
       else if (state.mode === 'room') exitRoom();
