@@ -143,6 +143,26 @@ git push -u origin main
 - 全部是靜態檔案，不需要 Actions
 - 影片在 YouTube 上，repo 只有程式碼，很小
 
+### 改版後要即刻見到（重要）
+
+GitHub Pages 對**所有檔案**（連 `index.html`）都送 `Cache-Control: max-age=600`，
+所以推上去之後，瀏覽器十分鐘內仍然會用舊檔，這段時間內不會問伺服器。
+
+每次部署改動程式碼之前，先跑一次版本更新：
+
+```powershell
+node tools/bump.mjs      # 把所有 JS／CSS／圖片的網址加上 ?v=時間戳
+git add .
+git commit -m "update"
+git push
+```
+
+換了版本號就等於換了網址，瀏覽器一定重新下載，不會出現「新 HTML + 舊 JS」的半新半舊。
+
+> 只有 `content.json` 的內容改動（影片 ID、開放與否）不用跑 bump，
+> 因為 `fetch` 已設 `cache: 'no-store'`，即時生效。
+> 但如果連 `index.html` 本身都還是舊的，第一次仍然要 **Ctrl + F5** 強制刷新一次。
+
 ## 六、檔案結構
 
 ```text

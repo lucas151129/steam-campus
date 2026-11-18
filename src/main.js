@@ -1,12 +1,12 @@
-import * as THREE from '../vendor/three.module.js';
-import { buildPlaza, buildRoom, blobShadow } from './world.js';
-import { buildCharacter } from './character.js';
-import { Controller } from './controller.js';
-import { Hud } from './hud.js';
-import { Npc } from './npc.js';
-import { initMedia, openVideo } from './media.js';
-import { initLightbox, openLightbox, closeLightbox } from './lightbox.js';
-import { t, pick, setLang, getLang } from './i18n.js';
+import * as THREE from '../vendor/three.module.js?v=202611181448';
+import { buildPlaza, buildRoom, blobShadow } from './world.js?v=202611181448';
+import { buildCharacter } from './character.js?v=202611181448';
+import { Controller } from './controller.js?v=202611181448';
+import { Hud } from './hud.js?v=202611181448';
+import { Npc } from './npc.js?v=202611181448';
+import { initMedia, openVideo } from './media.js?v=202611181448';
+import { initLightbox, openLightbox, closeLightbox } from './lightbox.js?v=202611181448';
+import { t, pick, setLang, getLang } from './i18n.js?v=202611181448';
 
 /* ---------------- 狀態 ---------------- */
 const state = {
