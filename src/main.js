@@ -111,6 +111,10 @@ async function boot() {
   const q = new URLSearchParams(location.search);
   state.front = q.get('cam') === 'front';
   if (q.has('photo')) pendingPhoto = Number(q.get('photo')) || 0;
+  if (q.has('pos')) {
+    const [px, pz] = String(q.get('pos')).split(',').map(Number);
+    if (Number.isFinite(px) && Number.isFinite(pz)) player.pos.set(px, 0, pz);
+  }
   if (q.has('yaw')) {
     const deg = Number(q.get('yaw'));
     if (Number.isFinite(deg)) player.face((deg * Math.PI) / 180);

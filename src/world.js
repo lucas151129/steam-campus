@@ -1018,6 +1018,8 @@ function addGuideSign(group, spot, zones) {
   );
   post.position.set(spot.x, 1.35, spot.z);
   post.rotation.y = ry;
+  // 立柱要退到牌面後面，否則 0.14 的柱身會從 0.1 厚的板子穿出來
+  post.translateZ(-0.08);
 
   const board = new THREE.Mesh(
     new THREE.BoxGeometry(2.9, 1.85, 0.1),
