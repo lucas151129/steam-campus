@@ -872,7 +872,7 @@ function addStreetProps(group, zones, n, batch) {
     });
   }
 
-  /* ---------- 旗桿（紫白校色旗） ---------- */
+  /* ---------- 旗桿（香港區旗） ---------- */
   const flagSpot = findSpot(gapA(0), 7.4, 0.9, n);
   solid.add(new THREE.CylinderGeometry(0.46, 0.58, 0.34, 12), {
     x: flagSpot.x,
@@ -900,38 +900,41 @@ function addStreetProps(group, zones, n, batch) {
   addGuideSign(group, signSpot, zones);
 }
 
-/* 校旗：紫底白帶，帶一點風的弧度 */
+/* 區旗：香港特別行政區區旗（assets/hk-flag.png，3:2，帶一點風的弧度） */
 function addFlag(group, spot) {
-  const cv = canvas2d(256, 160);
-  const g = cv.getContext('2d');
-  g.fillStyle = '#7a4e9e';
-  g.fillRect(0, 0, 256, 160);
-  g.fillStyle = '#ffffff';
-  g.fillRect(0, 58, 256, 34);
-  g.fillStyle = '#ffffff';
-  g.globalAlpha = 0.9;
-  g.beginPath();
-  g.arc(196, 46, 17, 0, TAU);
-  g.fill();
-  g.globalAlpha = 1;
+  const W = 2.13;
+  const H = 1.42;
 
-  const tex = canvasTexture(cv, { aniso: 4 });
-  const geo = new THREE.PlaneGeometry(2.3, 1.42, 18, 6);
-  geo.translate(1.15, 0, 0);
+  // 先鋪一層紅底，載入區旗圖後換上（載入失敗至少仍是紅旗，不會變白旗）
+  const cv = canvas2d(96, 64);
+  const g = cv.getContext('2d');
+  g.fillStyle = '#de2910';
+  g.fillRect(0, 0, 96, 64);
+  const mat = new THREE.MeshLambertMaterial({
+    map: canvasTexture(cv, { aniso: 4 }),
+    side: THREE.DoubleSide,
+  });
+
+  new THREE.TextureLoader().load('assets/hk-flag.png', (tex) => {
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    mat.map = tex;
+    mat.needsUpdate = true;
+  });
+
+  const geo = new THREE.PlaneGeometry(W, H, 18, 6);
+  geo.translate(W / 2, 0, 0);
   const p = geo.attributes.position;
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i);
     const y = p.getY(i);
-    const k = x / 2.3;
+    const k = x / W;
     p.setZ(i, Math.sin(k * 5.2 + 0.7) * 0.19 * k + Math.sin(k * 2.1) * 0.05);
     p.setY(i, y * (1 - 0.06 * k));
   }
   geo.computeVertexNormals();
 
-  const flag = new THREE.Mesh(
-    geo,
-    new THREE.MeshLambertMaterial({ map: tex, side: THREE.DoubleSide })
-  );
+  const flag = new THREE.Mesh(geo, mat);
   flag.position.set(spot.x, 7.55, spot.z);
   flag.rotation.y = -spot.a;
   group.add(flag);
