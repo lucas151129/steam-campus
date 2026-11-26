@@ -98,7 +98,7 @@ python -m http.server 8138
 ### 開放 / 未開放
 
 `"open": false` → 門會變灰、標籤寫「未開放」、選單變灰不可按、走近也不會進得去。
-現在「上海締造未來」與「上海 Maker Faire」兩個是 `true`，其餘四個是預留位置（活動 03–06），待上載。
+現在六個活動全部是 `true`（上海締造未來、上海 Maker Faire、深圳 Maker Faire、台灣 Maker Faire、上海創新科技、宋慶齡發明獎）。
 
 ### 放影片
 

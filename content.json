@@ -58,39 +58,99 @@
       "videos": []
     },
     {
-      "id": "slot3",
-      "open": false,
-      "color": "#46b39d",
-      "title": { "zh": "活動 03", "en": "Activity 03" },
-      "theme": { "zh": "待上載", "en": "Coming soon" },
-      "summary": { "zh": "", "en": "" },
+      "id": "sz-makerfaire",
+      "open": true,
+      "color": "#2f9e85",
+      "title": { "zh": "深圳 Maker Faire", "en": "Maker Faire Shenzhen" },
+      "theme": { "zh": "大灣區國際創客峰會", "en": "Greater Bay Area Maker Summit" },
+      "summary": {
+        "zh": "2024年11月16至17日，本校師生赴深圳參加「大灣區國際創客峰會暨 Maker Faire Shenzhen」。峰會以「萬物皆可 AI」為主題，匯聚超過 120 家來自世界各地的展商；學生展出 AI 安全監察裝置、以生成式 AI 推廣香港旅遊與非物質文化遺產的作品，並與各地創客交流。",
+        "en": "On 16–17 November 2024 our students joined the Greater Bay Area International Maker Summit and Maker Faire Shenzhen. Under the theme “Everything Can Be AI”, the summit brought together more than 120 exhibitors from around the world; our students presented an AI safety monitoring device and generative-AI works promoting Hong Kong tourism and intangible cultural heritage."
+      },
+      "photos": [
+        "assets/sz-makerfaire/a01.jpg",
+        "assets/sz-makerfaire/a02.jpg",
+        "assets/sz-makerfaire/a03.jpg",
+        "assets/sz-makerfaire/a04.jpg",
+        "assets/sz-makerfaire/a05.jpg",
+        "assets/sz-makerfaire/a06.jpg",
+        "assets/sz-makerfaire/a07.jpg",
+        "assets/sz-makerfaire/a08.jpg",
+        "assets/sz-makerfaire/a09.jpg",
+        "assets/sz-makerfaire/a10.jpg"
+      ],
       "videos": []
     },
     {
-      "id": "slot4",
-      "open": false,
-      "color": "#e0a03c",
-      "title": { "zh": "活動 04", "en": "Activity 04" },
-      "theme": { "zh": "待上載", "en": "Coming soon" },
-      "summary": { "zh": "", "en": "" },
+      "id": "tw-makerfaire",
+      "open": true,
+      "color": "#8e6bc8",
+      "title": { "zh": "台灣 Maker Faire", "en": "Taiwan Maker Faire" },
+      "theme": { "zh": "科技深度學習交流團", "en": "Technology Learning Exchange" },
+      "summary": {
+        "zh": "2024年11月29日起一連五日，學生赴台北參加「STEAM — 台灣 Maker Faire 科技深度學習交流團」，向各地參加者展示自家研發的作品；行程亦走訪大安森林公園、九份老街、十分車站、台灣科學教育館及台北 101，認識風阻尼器的原理。",
+        "en": "From 29 November 2024 our students spent five days in Taipei on the STEAM Taiwan Maker Faire exchange, presenting their own projects to visitors from around the world. The itinerary also took in Da’an Forest Park, Jiufen Old Street, Shifen Station, the National Taiwan Science Education Center and Taipei 101, where they learned how a tuned mass damper works."
+      },
+      "photos": [
+        "assets/tw-makerfaire/a01.jpg",
+        "assets/tw-makerfaire/a02.jpg",
+        "assets/tw-makerfaire/a03.jpg",
+        "assets/tw-makerfaire/a04.jpg",
+        "assets/tw-makerfaire/a05.jpg",
+        "assets/tw-makerfaire/a06.jpg",
+        "assets/tw-makerfaire/a07.jpg",
+        "assets/tw-makerfaire/a08.jpg",
+        "assets/tw-makerfaire/a09.jpg",
+        "assets/tw-makerfaire/a10.jpg"
+      ],
       "videos": []
     },
     {
-      "id": "slot5",
-      "open": false,
-      "color": "#4c8dd6",
-      "title": { "zh": "活動 05", "en": "Activity 05" },
-      "theme": { "zh": "待上載", "en": "Coming soon" },
-      "summary": { "zh": "", "en": "" },
+      "id": "sh-media",
+      "open": true,
+      "color": "#c98a2e",
+      "title": { "zh": "上海創新科技", "en": "Shanghai Innovation & Media" },
+      "theme": { "zh": "新媒體傳播深度學習團", "en": "New Media Study Tour" },
+      "summary": {
+        "zh": "2025年4月16至20日，約 30 位師生赴上海參與「上海創新科技及新媒體傳播深度學習團」，走訪復旦大學、上海交通大學、中國商飛及嗶哩嗶哩總部，了解新媒體與創新科技的發展。",
+        "en": "From 16 to 20 April 2025, around 30 teachers and students joined the Shanghai Innovation Technology and New Media study tour, visiting Fudan University, Shanghai Jiao Tong University, COMAC and the Bilibili headquarters to see how new media and innovation technology are developing."
+      },
+      "photos": [
+        "assets/sh-media/a01.jpg",
+        "assets/sh-media/a02.jpg",
+        "assets/sh-media/a03.jpg",
+        "assets/sh-media/a04.jpg",
+        "assets/sh-media/a05.jpg",
+        "assets/sh-media/a06.jpg",
+        "assets/sh-media/a07.jpg",
+        "assets/sh-media/a08.jpg",
+        "assets/sh-media/a09.jpg",
+        "assets/sh-media/a10.jpg"
+      ],
       "videos": []
     },
     {
-      "id": "slot6",
-      "open": false,
-      "color": "#e06b7f",
-      "title": { "zh": "活動 06", "en": "Activity 06" },
-      "theme": { "zh": "待上載", "en": "Coming soon" },
-      "summary": { "zh": "", "en": "" },
+      "id": "scl-award",
+      "open": true,
+      "color": "#c2546b",
+      "title": { "zh": "宋慶齡發明獎", "en": "Soong Ching Ling Invention Award" },
+      "theme": { "zh": "第二十屆 · 少年兒童發明獎", "en": "20th Children’s Invention Award" },
+      "summary": {
+        "zh": "2025年「宋慶齡少年兒童未來科學日暨第二十屆宋慶齡少年兒童發明獎」，學生帶同科創作品參賽，並於頒獎活動中獲獎。",
+        "en": "At the 2025 Soong Ching Ling Children’s Future Science Day and the 20th Soong Ching Ling Children’s Invention Award, our students entered their maker projects and received an award at the presentation ceremony."
+      },
+      "photos": [
+        "assets/scl-award/a01.jpg",
+        "assets/scl-award/a02.jpg",
+        "assets/scl-award/a03.jpg",
+        "assets/scl-award/a04.jpg",
+        "assets/scl-award/a05.jpg",
+        "assets/scl-award/a06.jpg",
+        "assets/scl-award/a07.jpg",
+        "assets/scl-award/a08.jpg",
+        "assets/scl-award/a09.jpg",
+        "assets/scl-award/a10.jpg"
+      ],
       "videos": []
     }
   ]
