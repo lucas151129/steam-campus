@@ -1,7 +1,7 @@
 # STEAM DAY 虛擬校園 · Virtual Campus
 
-一年級至六年級的 STEAM DAY 花絮，放在一個可以走動的 3D 校園裡。
-中央廣場 → 六道門 → 六個展館（影片 + 相片牆）。
+各項活動的成果與花絮，放在一個可以走動的 3D 校園裡。
+中央廣場 → 六道門 → 六個展館（相片牆 + 影片）。
 
 - 純靜態網站，**沒有後端、沒有打包工具**，可以直接放 GitHub Pages
 - Three.js r170 已放在 `vendor/`，離線也能跑
@@ -40,7 +40,7 @@ python -m http.server 8138
 | 進入展館 / 播放 | `E` 或 `Enter` | 畫面中央提示按鈕 |
 | 放大相片 | 點相片牆或大螢幕 | 進入展館後直接點 |
 | 回廣場 | `Esc` | 右上「返回廣場」 |
-| 選單（跳年級、語言、角色、轉正面） | — | 左上 ☰ |
+| 選單（跳展區、語言、角色、轉正面） | — | 左上 ☰ |
 
 > 展館內視角較廣（FOV 66°），加上可擡頭低頭，站近大螢幕也看得到整張相。
 
@@ -78,16 +78,15 @@ python -m http.server 8138
 
 ## 四、換內容：只改 `content.json`
 
-每一個年級就是 `zones` 裡的一個物件：
+每一個活動就是 `zones` 裡的一個物件：
 
 ```json
 {
-  "id": "g1",
+  "id": "makerfair",
   "open": true,
-  "grade": 1,
-  "color": "#f0a63c",
-  "title": { "zh": "一年級", "en": "Grade 1" },
-  "theme": { "zh": "光影與顏色", "en": "Light & Colour" },
+  "color": "#1a4fa0",
+  "title": { "zh": "上海 Maker Faire", "en": "Shanghai Maker Faire" },
+  "theme": { "zh": "深度學習交流活動", "en": "Deep Learning Exchange" },
   "summary": { "zh": "……", "en": "……" },
   "videos": [
     { "type": "youtube", "id": "dQw4w9WgXcQ",
@@ -99,7 +98,7 @@ python -m http.server 8138
 ### 開放 / 未開放
 
 `"open": false` → 門會變灰、標籤寫「未開放」、選單變灰不可按、走近也不會進得去。
-現在只有「特別展區 · 上海締造未來」是 `true`，其餘五個年級是 `false`。
+現在只有「上海 Maker Faire」是 `true`，其餘五個是預留位置（活動 02–06），待上載。
 
 ### 放影片
 
@@ -112,7 +111,7 @@ python -m http.server 8138
 
 ### 換顏色
 
-`color` 同時決定：屋頂、門框、室內主牆、光線、選單色點。六個年級建議六種顏色。
+`color` 同時決定：屋頂、門框、室內主牆、光線、選單色點。每個活動建議一種顏色。
 
 ### 相片牆
 
@@ -170,7 +169,8 @@ steam-campus/
 ├─ index.html          版面（無 import map，模組用相對路徑）
 ├─ style.css           HUD、指南針、選單、影片層
 ├─ content.json        ★ 所有內容（展區、顏色、相片、影片 id）
-├─ assets/shanghai/    上海活動相片（已壓成 1200px）
+├─ assets/makerfair/   上海 Maker Faire 相片（已壓成 1200px）
+├─ assets/shanghai/    舊展區相片（暫未使用，可留給下一個活動）
 ├─ preview-*.png       宣傳用截圖
 ├─ serve.mjs           本機靜態伺服器
 ├─ start.bat           雙擊啟動
@@ -193,7 +193,7 @@ steam-campus/
 | 參數 | 作用 |
 | --- | --- |
 | `?nomenu` | 不自動開選單（截圖用） |
-| `?zone=special` | 直接進入某個展區 |
+| `?zone=makerfair` | 直接進入某個展區（用 `content.json` 的 `id`） |
 | `?cam=front` | 鏡頭轉到角色正面 |
 | `?yaw=90` | 初始面向（度） |
 | `?pos=x,z` | 初始位置（例如 `?pos=-6.6,3.6`） |
@@ -203,7 +203,7 @@ steam-campus/
 | `?autotap` | 把第一張相片投影到螢幕座標並模擬點擊（驗證用） |
 | `?debug` | 把 draw call / 三角形 / 貼圖數寫進分頁標題 |
 
-例如：`http://127.0.0.1:8138/?nomenu&zone=special&cam=front`
+例如：`http://127.0.0.1:8138/?nomenu&zone=makerfair&cam=front`
 
 ## 八、已知限制
 

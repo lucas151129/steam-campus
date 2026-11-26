@@ -1,7 +1,7 @@
 export const STR = {
   zh: {
     title: 'STEAM DAY 虛擬校園',
-    subtitle: '一年級至六年級的 STEAM DAY 活動花絮',
+    subtitle: '各項活動的成果與花絮',
     start: '開始參觀',
     facing: '面向',
     enter: '進入展館',
@@ -15,7 +15,7 @@ export const STR = {
     fullscreen: '全螢幕',
     hint: '用 ◀ ▶ 轉身，▲ ▼ 前進後退，走近展館再按「進入」',
     exitHint: '按 Esc 或「返回廣場」離開',
-    chooseGrade: '選擇年級',
+    chooseGrade: '選擇活動',
     loading: '載入中…',
     closed: '未開放',
     open: '開放中',
@@ -34,7 +34,7 @@ export const STR = {
   },
   en: {
     title: 'STEAM DAY Virtual Campus',
-    subtitle: 'Highlights from Grade 1 to Grade 6 STEAM Day',
+    subtitle: 'Projects and highlights from our activities',
     start: 'Start exploring',
     facing: 'Facing',
     enter: 'Enter',
@@ -48,7 +48,7 @@ export const STR = {
     fullscreen: 'Full screen',
     hint: 'Turn with ◀ ▶, walk with ▲ ▼, then step close and tap Enter',
     exitHint: 'Press Esc or "Back to plaza" to leave',
-    chooseGrade: 'Choose a grade',
+    chooseGrade: 'Choose an activity',
     loading: 'Loading…',
     closed: 'Not open yet',
     open: 'Open',
