@@ -5,6 +5,35 @@
   },
   "zones": [
     {
+      "id": "zaomeng",
+      "open": true,
+      "color": "#7a4e9e",
+      "title": { "zh": "上海締造未來", "en": "Building the Future · Shanghai" },
+      "theme": { "zh": "青少年創新發展項目", "en": "Youth Innovation Programme" },
+      "summary": {
+        "zh": "「締造未來」青少年創新發展項目——新時代築夢計劃（機器人）。學生帶着自製的機械人與科創作品赴上海交流，與當地師生同場展示及比賽。",
+        "en": "The “Building the Future” youth innovation programme — the new-era dream-building scheme on robotics. Students took their own robots and maker projects to Shanghai for a joint showcase and competition with local schools."
+      },
+      "photos": [
+        "assets/shanghai/p01.jpg",
+        "assets/shanghai/p02.jpg",
+        "assets/shanghai/p03.jpg",
+        "assets/shanghai/p04.jpg",
+        "assets/shanghai/p05.jpg",
+        "assets/shanghai/p06.jpg",
+        "assets/shanghai/p07.jpg",
+        "assets/shanghai/p08.jpg",
+        "assets/shanghai/p09.jpg",
+        "assets/shanghai/p10.jpg",
+        "assets/shanghai/p11.jpg",
+        "assets/shanghai/p12.jpg",
+        "assets/shanghai/p13.jpg",
+        "assets/shanghai/p14.jpg",
+        "assets/shanghai/p15.jpg"
+      ],
+      "videos": []
+    },
+    {
       "id": "makerfair",
       "open": true,
       "color": "#1a4fa0",
@@ -29,18 +58,9 @@
       "videos": []
     },
     {
-      "id": "slot2",
-      "open": false,
-      "color": "#46b39d",
-      "title": { "zh": "活動 02", "en": "Activity 02" },
-      "theme": { "zh": "待上載", "en": "Coming soon" },
-      "summary": { "zh": "", "en": "" },
-      "videos": []
-    },
-    {
       "id": "slot3",
       "open": false,
-      "color": "#8e6bc8",
+      "color": "#46b39d",
       "title": { "zh": "活動 03", "en": "Activity 03" },
       "theme": { "zh": "待上載", "en": "Coming soon" },
       "summary": { "zh": "", "en": "" },
