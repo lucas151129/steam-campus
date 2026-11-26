@@ -1,5 +1,5 @@
-import * as THREE from '../vendor/three.module.js?v=202611181448';
-import { buildCharacter } from './character.js?v=202611181448';
+import * as THREE from '../vendor/three.module.js?v=202611261812';
+import { buildCharacter } from './character.js?v=202611261812';
 
 /* 角色分工 */
 const ROLE = {

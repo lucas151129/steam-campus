@@ -1,4 +1,4 @@
-import * as THREE from '../vendor/three.module.js?v=202611181448';
+import * as THREE from '../vendor/three.module.js?v=202611261812';
 
 /* =====================================================================
    STEAM DAY 虛擬校園 —— 廣場與展館的場景美術
@@ -915,7 +915,7 @@ function addFlag(group, spot) {
     side: THREE.DoubleSide,
   });
 
-  new THREE.TextureLoader().load('assets/hk-flag.png?v=202611181448', (tex) => {
+  new THREE.TextureLoader().load('assets/hk-flag.png?v=202611261812', (tex) => {
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 4;
     mat.map = tex;

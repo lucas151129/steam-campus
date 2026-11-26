@@ -1,4 +1,4 @@
-import * as THREE from '../vendor/three.module.js?v=202611181448';
+import * as THREE from '../vendor/three.module.js?v=202611261812';
 
 /* ───────────────────────── 配色 ─────────────────────────
    校服：白襯衫、紫色領帶（男）／紫色緞帶與腰帶（女）、

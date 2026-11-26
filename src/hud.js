@@ -1,5 +1,5 @@
-import * as THREE from '../vendor/three.module.js?v=202611181448';
-import { t, pick } from './i18n.js?v=202611181448';
+import * as THREE from '../vendor/three.module.js?v=202611261812';
+import { t, pick } from './i18n.js?v=202611261812';
 
 const DIR_NAMES = {
   0: '北 N',

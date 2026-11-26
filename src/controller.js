@@ -1,4 +1,4 @@
-import * as THREE from '../vendor/three.module.js?v=202611181448';
+import * as THREE from '../vendor/three.module.js?v=202611261812';
 
 const STEP = Math.PI / 4;
 
